@@ -7,6 +7,7 @@ import cuid from 'cuid'
 import TextInput from "../../../app/form/TextInput";
 import TextArea from "../../../app/form/TextArea";
 import SelectInput from "../../../app/form/SelectInput";
+import {Link} from 'react-router-dom'
 
 const category = [
     {key: 'drinks', text: 'Drinks', value: 'drinks'},
@@ -71,7 +72,7 @@ class EventForm extends Component{
                                 <Button positive type="submit">
                                     Submit
                                 </Button>
-                                <Button onClick={this.props.history.goBack} type="button">Cancel</Button>
+                                <Button as={Link} to='/events' type="button">Cancel</Button>
                             </Form>
                         </Segment>
                     </Grid.Column>
