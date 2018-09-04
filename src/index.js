@@ -7,29 +7,30 @@ import './index.css';
 import App from './app/layout/App';
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore } from './app/store/configureStore';
-import ScrollToTop from './app/common/util/ScrollToTop'
+import ScrollToTop from './app/common/util/ScrollToTop';
 
 const store = configureStore();
 
-const rootEl = document.getElementById('root');
+// eslint-disable-next-line
+const rootEl = document.getElementById( 'root' );
 
-let render = () => {
+const render = () => {
     ReactDOM.render(
-        <Provider store={store}>
+        <Provider store={ store }>
             <BrowserRouter>
-              <ScrollToTop>
-                <App />
-              </ScrollToTop>
+                <ScrollToTop>
+                    <App />
+                </ScrollToTop>
             </BrowserRouter>
         </Provider>,
-        rootEl
+        rootEl,
     );
 };
 
-if (module.hot) {
-    module.hot.accept('./app/layout/App', () => {
-        setTimeout(render);
-    });
+if ( module.hot ) {
+    module.hot.accept( './app/layout/App', () => {
+        setTimeout( render );
+    } );
 }
 
 render();
