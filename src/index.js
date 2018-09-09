@@ -11,26 +11,25 @@ import ScrollToTop from './app/common/util/ScrollToTop';
 
 const store = configureStore();
 
-// eslint-disable-next-line
-const rootEl = document.getElementById( 'root' );
+const rootEl = document.getElementById('root');
 
-const render = () => {
-    ReactDOM.render(
-        <Provider store={ store }>
-            <BrowserRouter>
-                <ScrollToTop>
-                    <App />
-                </ScrollToTop>
-            </BrowserRouter>
-        </Provider>,
-        rootEl,
-    );
+let render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
+      </BrowserRouter>
+    </Provider>,
+    rootEl
+  );
 };
 
-if ( module.hot ) {
-    module.hot.accept( './app/layout/App', () => {
-        setTimeout( render );
-    } );
+if (module.hot) {
+  module.hot.accept('./app/layout/App', () => {
+    setTimeout(render);
+  });
 }
 
 render();

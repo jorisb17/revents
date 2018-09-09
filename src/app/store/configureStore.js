@@ -1,29 +1,29 @@
-import {createStore, applyMiddleware} from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from '../reducers/rootReducer'
-import {composeWithDevTools} from 'redux-devtools-extension'
 
-export const configureStore = (preloadedState) =>{
-    const middlewares = [];
-    const middlewareEnhancer = applyMiddleware(...middlewares);
+export const configureStore = (preloadedState) => {
+  const middlewares = [];
+  const middlewareEnhancer = applyMiddleware(...middlewares);
 
-    const storeEnhancers = [middlewareEnhancer];
+  const storeEnhancers = [middlewareEnhancer];
 
-    const composedEnhancer = composeWithDevTools(...storeEnhancers);
+  const composedEnhancer  = composeWithDevTools(...storeEnhancers);
 
-    const store = createStore(
-        rootReducer,
-        preloadedState,
-        composedEnhancer
-    );
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    composedEnhancer
+  )
 
-    if(process.env.NODE_ENV !=='production'){
-        if(module.hot){
-            module.hot.accept('../reducers/rootReducer', () =>{
-                const newRootReducer = require('../reducers/rootReducer').default;
-                store.replaceReducer(newRootReducer)
-            })
-        }
+  if (process.env.NODE_ENV !== 'production') {
+    if (module.hot) {
+      module.hot.accept('../reducers/rootReducer', () => {
+        const newRootReducer = require('../reducers/rootReducer').default;
+        store.replaceReducer(newRootReducer)
+      })
     }
+  }
 
-    return store;
+  return store;
 }

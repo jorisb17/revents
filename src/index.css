@@ -101,6 +101,6 @@ body {
 /*chat comments*/
 
 .ui.comments .comment .comments {
-    padding-bottom: 0 !important;
-    padding-left: 2em !important;
+  padding-bottom: 0 !important;
+  padding-left: 2em !important;
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Form, Label} from 'semantic-ui-react'
+import { Form, Label } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
-import '../../../node_modules/react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
 
-const DateInput = ({input: {value, onChange, ...restInput}, width, placeholder, meta: {touched, error}, ...rest}) =>{
-  return(
+const DateInput = ({input: {value, onChange, ...restInput}, width, placeholder, meta: {touched, error}, ...rest}) => {
+  return (
     <Form.Field error={touched && !!error} width={width}>
       <DatePicker
         {...rest}
