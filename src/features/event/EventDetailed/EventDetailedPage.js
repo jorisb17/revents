@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Grid } from 'semantic-ui-react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
 import EventDetailedChat from './EventDetailedChat';
@@ -20,19 +20,23 @@ const mapState = (state, ownProps) => {
   }
 }
 
-const EventDetailedPage = ({event}) => {
-  return (
-    <Grid>
-      <Grid.Column width={10}>
-        <EventDetailedHeader event={event} />
-        <EventDetailedInfo event={event} />
-        <EventDetailedChat />
-      </Grid.Column>
-      <Grid.Column width={6}>
-        <EventDetailedSidebar attendees={event.attendees}/>
-      </Grid.Column>
-    </Grid>
-  );
+
+class EventDetailedPage extends Component {
+  render(){
+    const {event} = this.props
+    return (
+      <Grid>
+        <Grid.Column width={10}>
+          <EventDetailedHeader event={event} />
+          <EventDetailedInfo event={event} />
+          <EventDetailedChat />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <EventDetailedSidebar attendees={event.attendees}/>
+        </Grid.Column>
+      </Grid>
+    );
+  }
 };
 
 export default connect(mapState)(EventDetailedPage);
