@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Segment, Form, Divider, Button } from 'semantic-ui-react';
+import { Segment, Form, Header, Divider, Button } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
+import moment from 'moment';
 import DateInput from '../../../app/common/form/DateInput';
 import PlaceInput from '../../../app/common/form/PlaceInput';
 import TextInput from '../../../app/common/form/TextInput';
@@ -8,9 +9,10 @@ import RadioInput from '../../../app/common/form/RadioInput';
 
 class BasicPage extends Component {
   render() {
-    const { pristine, submitting, handleSubmit, updateProfile} = this.props;
+    const { pristine, submitting, handleSubmit, updateProfile } = this.props;
     return (
       <Segment>
+        <Header dividing size="large" content="Basics" />
         <Form onSubmit={handleSubmit(updateProfile)}>
           <Field
             width={8}
@@ -44,6 +46,7 @@ class BasicPage extends Component {
             showYearDropdown={true}
             showMonthDropdown={true}
             dropdownMode='select'
+            maxDate={moment().subtract(18, 'years')}
             placeholder="Date of Birth"
           />
           <Field
@@ -67,6 +70,6 @@ class BasicPage extends Component {
   }
 }
 
-export default reduxForm({ form: 'userProfile', enableReinitialize: true, destroyOnUnmount: false})(
+export default reduxForm({ form: 'userProfile', enableReinitialize: true, destroyOnUnmount: false })(
   BasicPage
 );

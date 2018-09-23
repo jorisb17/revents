@@ -29,7 +29,7 @@ const sampleData = {
       ]
     },
     {
-      id: 'xL8eeRdAvW610HqVigaR',
+      id: '2',
       title: 'Trip to Punch and Judy Pub',
       date: '2018-03-18T14:00:00',
       category: 'drinks',
