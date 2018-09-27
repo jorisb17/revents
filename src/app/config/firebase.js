@@ -8,12 +8,12 @@ const firebaseConfig = {
   projectId: "revents-214215",
   storageBucket: "revents-214215.appspot.com",
   messagingSenderId: "831921658635"
-}
+};
 
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 const settings = {
   timestampsInSnapshots: true
-}
-firestore.settings(settings)
+};
+firestore.settings(settings);
 export default firebase;

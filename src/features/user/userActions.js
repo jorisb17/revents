@@ -170,13 +170,12 @@ export const getUserEvents = (userUid, activeTab) => async (dispatch, getState) 
         let querySnap = await query.get();
         let events = [];
 
-        for(let i = 0; i < querySnap.docs.length; i++){
+        for (let i=0; i<querySnap.docs.length; i++) {
             let evt = await firestore.collection('events').doc(querySnap.docs[i].data().eventId).get();
             events.push({...evt.data(), id: evt.id})
-
         }
 
-        dispatch({type: FETCH_EVENTS, payload: {events}});
+        dispatch({type: FETCH_EVENTS, payload: {events}})
 
         dispatch(asyncActionFinish());
     } catch (error) {
@@ -184,3 +183,40 @@ export const getUserEvents = (userUid, activeTab) => async (dispatch, getState) 
         dispatch(asyncActionError());
     }
 };
+
+export const followUser = userToFollow => async (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore();
+    const user = firestore.auth().currentUser;
+    const following = {
+        photoURL: userToFollow.photoURL || '/assets/user.png',
+        city: userToFollow.city || 'unknown city',
+        displayName: userToFollow.displayName
+    }
+    try {
+        await firestore.set(
+            {
+                collection: 'users',
+                doc: user.uid,
+                subcollections: [{collection: 'following', doc: userToFollow.id}]
+            },
+            following
+        );
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const unfollowUser  = (userToUnfollow) =>
+    async (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        const user = firestore.auth().currentUser;
+        try {
+            await firestore.delete({
+                collection: 'users',
+                doc: user.uid,
+                subcollections: [{collection: 'following', doc: userToUnfollow.id}]
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
